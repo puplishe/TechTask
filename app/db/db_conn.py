@@ -16,7 +16,7 @@ DATABASE_URL = f'postgresql+asyncpg://{user}:{password}@{host}/{db_name}'
 engine = create_async_engine(DATABASE_URL, future=True)
 
 
-async_session = sessionmaker(
+async_session: AsyncSession = sessionmaker(
     bind=engine,
     class_=AsyncSession,
     expire_on_commit=False,
@@ -24,8 +24,6 @@ async_session = sessionmaker(
 )
 
 Base = declarative_base()
-
-
 
 
 async def get_db() -> AsyncSession:

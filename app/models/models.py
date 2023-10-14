@@ -1,7 +1,7 @@
-from sqlalchemy import ForeignKey, Column, String, Integer, DateTime
-from datetime import datetime
+from sqlalchemy import Column, DateTime, Integer, String
 
-from models.models import Base
+from ..db.db_conn import Base
+
 
 class QuestionModel(Base):
     __tablename__ = 'questions'
@@ -11,3 +11,12 @@ class QuestionModel(Base):
     question_text = Column(String, unique=True, nullable=False)
     question_answer = Column(String, nullable=False)
     creation_date = Column(DateTime, nullable=False)
+
+    def as_dict(self):
+        return {
+            'id': self.id,
+            'question_id': self.question_id,
+            'question_text': self.question_text,
+            'question_answer': self.question_answer,
+            'creation_date': self.creation_date,
+        }
